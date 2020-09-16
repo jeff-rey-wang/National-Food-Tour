@@ -1,0 +1,43 @@
+3.1
+
+Identify what type of graph to use to solve this problem. What do the nodes of the graph represent?
+What do edges represent? Describe how you can use the graph and the algorithms below to solve the 
+given problem.
+
+Since the graphs will be implemented with the use of an adjacency list, it is more beneficial to use a digraph for these applications. This is because in a 
+digraph, symmetry of the adjacency list is not maintained; resulting in less elements having to be updated when adding edges to the list.  Furthermore, these
+applications do not require traversal back and forth between nodes; nullifying the need for undirected paths. Nodes will represent the cities of the dataset,
+with consideration of restaurants and food being considered for finding the shortest (cheapest path). As for edges, they will represent the connections between
+cities as provided by a dataset. When considering the shortest path between destinations, the edge weights will be representative of the meal price of the
+destination city. In order to find any viable path, DFS and BFS will be implemented, and will search the graph from a provided source node. If reachable, these
+algorithms will return a path (ignoring the cost of the path,) connecting the source with the specified city. When considering the shortest path, Djikstra's
+Algorithm will be used since there are no negative weights in the graph. The algorithm will keep track of distance from source s to vertex v by summation of 
+meal prices, and output a path whose meal price is less than that of any other. 
+
+3.2
+
+Analyze which algorithm found the result in fewer steps? Will this remain true if the number of stops
+increases? Why or why not?
+
+BFS found the path in significantly fewer steps than DFS, because BFS traverses edges in order of their distances from the source node. This is because BFS uses a
+queue to keep track of nodes to traverse, which results in closer nodes being traversed before further nodes. In an unweighted graph, BFS will return the path to
+vertex v that takes the fewest edges from source s. This explains why BFS provided a path with few edges compared to DFS, which recursively traverses the adjacency
+list until it finds the destination node. In this application, the higher out-degree of various nodes causes the search to traverse through several superfluous nodes,
+and take an extensive detour to finally reach the destination node. While the number of stops affects the number of steps each algorithm will take; the shape of
+the graph has a greater effect on the algorithm's performance. A skinny, long graph with all its edges pointing a long distance away from the source will benefit
+more from BFS whereas a graph whose edges are concentrated near the source will benefit from DFS.
+
+3.4
+
+What is the complexity of this problem? Justify your answer. Will the complexity remain the same if
+the number of cities increases? What if the number of stops is increased? The number of restaurants?
+Why or why not?
+
+The given problem maintains the linearithmic time complexity of Djikstra's Algorithm. Even after including the linear time it takes to convert dataset information into
+usable objects, the problem can be bounded by ~O(E * log V). This time complexity comes from the fact that in the worst case, each vertex is relaxed once for each
+neighbour it has, resulting in a total of E relaxations. This number is multiplied by log V, which represents the time it takes to retrieve a value from a priority queue
+as a heap implementation. While the current number of restaurants does not bound the algorithm's time complexity, with enough restaurants to search from, the time required
+for dataset processing would itself have a significant effect on runtime. According to this bounding, the number of vertices (cities) and edges (connections between cities) will cause a drastic increase in runtime. Similarly, adding many more
+restaurant franchises would significantly increase the time taken to read though the entire dataset, and convert the provided data into usuable objects.
+
+
